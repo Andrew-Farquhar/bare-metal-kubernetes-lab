@@ -8,7 +8,7 @@ The aim of the project is to build and operate a small, production inspired Kube
 
 The initial implementation will prioritise understanding the mechanics of the individual components rather than hiding complexity behind pre-built distributions or automation (although this may be implemented in later iterations of the project).
 
-Key areas of focus:
+# Key areas of focus:
 
 - Kubernetes cluster architecture and opersations
 - kubeadm cluster bootstrapping
@@ -21,7 +21,7 @@ Key areas of focus:
 - Documentation and version control 
 - Automation (introduced once underlying systems are confidently administered and understood)
 
-Hardware:
+# Hardware:
 
 Component                  Specification
 Nodes                      5 x Dell OptiPlex 9010 Micro (this may drop to 3 in later iterations)
@@ -32,7 +32,7 @@ Networking                 Cat6 Ethernet to Gigabit unmanaged switch (with scope
 
 A sixth node is available and may eventually be used for networking (router/firewall).
 
-Planned Kubernetes Stack
+# Planned Kubernetes Stack
 
 The initial cluster will use:
 
@@ -46,7 +46,7 @@ NFS-backed persistent storage
 
 The exact CNI and additional Kubernetes components will be documented as the implementation progresses.
 
-Planned Workloads
+# Planned Workloads
 
 The cluster is intended to host a mixture of stateful and stateless self-hosted applications, including:
 
@@ -84,7 +84,7 @@ Operational testing
 
 The intention is to treat the homelab as a practical platform engineering project rather than simply a collection of applications running on Kubernetes.
 
-Project Status
+# Project Status
 
 Phase 0 — Planning
 
