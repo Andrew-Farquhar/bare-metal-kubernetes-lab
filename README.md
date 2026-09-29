@@ -83,13 +83,19 @@ The intention is to treat the homelab as a practical platform engineering projec
 
 # Project Status
 
-Phase 0 — Planning
+Phase 0 — Planning & Preparation
 
 - [x] Define project goals
 - [x] Select hardware
 - [x] Define initial service architecture
 - [x] Select the node operating system
 - [x] Prepare Git repository structure
+- [x] Inspect nodes and verify suitable
+- [x] Install selected OS
+- [x] Confirm SSH configured
+
+Phase 1 - First build and test of Kubernetes
+
 - [ ] Install and configure first Kubernetes node
 - [ ] Bootstrap Kubernetes control plane
 - [ ] Configure CNI
