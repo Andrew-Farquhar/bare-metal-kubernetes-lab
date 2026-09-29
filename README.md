@@ -51,11 +51,6 @@ The exact CNI and additional Kubernetes components will be documented as the imp
 The cluster is intended to host a mixture of stateful and stateless self-hosted applications, including:
 
 - pihole
-- Sonarr
-- Radarr
-- Readarr
-- Prowlarr
-- Jellyseerr
 - Immich
 - Mealie
 - Wanderer
