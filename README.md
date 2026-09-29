@@ -21,14 +21,15 @@ The initial implementation will prioritise understanding the mechanics of the in
 - Documentation and version control 
 - Automation (introduced once underlying systems are confidently administered and understood)
 
-# Hardware:
+# Hardware
 
-Component                  Specification
-Nodes                      5 x Dell OptiPlex 9010 Micro (this may drop to 3 in later iterations)
-CPU                        Intel Core i5-4590T
-Memory                     8GB DDR3L (per node)
-Storage                    128 GB SATA SSD (per node)
-Networking                 Cat6 Ethernet to Gigabit unmanaged switch (with scope to move to managed switch)
+| Component | Specification |
+|-----------|---------------|
+| Nodes | 5 x Dell OptiPlex 9010 Micro (this may drop to 3 in later iterations) |
+| CPU | Intel Core i5-4590T |
+| Memory | 8GB DDR3L (per node) |
+| Storage | 128 GB SATA SSD (per node) |
+| Networking | Cat6 Ethernet to Gigabit unmanaged switch (with scope to move to managed switch) |
 
 A sixth node is available and may eventually be used for networking (router/firewall).
 
