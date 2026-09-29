@@ -10,7 +10,7 @@ The initial implementation will prioritise understanding the mechanics of the in
 
 # Key areas of focus:
 
-- Kubernetes cluster architecture and opersations
+- Kubernetes cluster architecture and operations
 - kubeadm cluster bootstrapping
 - Container runtimes and nerdctl
 - Kubernetes networking and CNI configuration
@@ -36,13 +36,13 @@ A sixth node is available and may eventually be used for networking (router/fire
 
 The initial cluster will use:
 
-Debian 13
-Kubernetes
-kubeadm
-containerd
-nerdctl
-A manually configured CNI
-NFS-backed persistent storage
+- Debian 13
+- Kubernetes
+- kubeadm
+-  containerd
+- nerdctl
+- A manually configured CNI
+- NFS-backed persistent storage
 
 The exact CNI and additional Kubernetes components will be documented as the implementation progresses.
 
@@ -75,12 +75,12 @@ Automation will be introduced progressively once the underlying components are u
 
 The project will document not only the final configuration, but also:
 
-Architectural decisions
-Problems encountered
-Troubleshooting and recovery
-Changes in design
-Lessons learned
-Operational testing
+- Architectural decisions
+- Problems encountered
+- Troubleshooting and recovery
+- Changes in design
+- Lessons learned
+- Operational testing
 
 The intention is to treat the homelab as a practical platform engineering project rather than simply a collection of applications running on Kubernetes.
 
