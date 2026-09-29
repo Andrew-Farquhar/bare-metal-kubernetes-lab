@@ -63,7 +63,8 @@ The cluster is intended to host a mixture of stateful and stateless self-hosted 
 - Monitoring and supporting infrastructure
 
 Some existing services will remain on the NAS where their storage, hardware or operational requirements make that the more appropriate architecture.
-Learning Approach
+
+# Learning Approach
 
 The cluster will initially be built and configured manually.
 
