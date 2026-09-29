@@ -88,7 +88,7 @@ Phase 0 — Planning
 - [x] Define project goals
 - [x] Select hardware
 - [x] Define initial service architecture
-- [x] Select Debian 13 as the node operating system
+- [x] Select the node operating system
 - [x] Prepare Git repository structure
 - [ ] Install and configure first Kubernetes node
 - [ ] Bootstrap Kubernetes control plane
