@@ -27,7 +27,7 @@ graph TD
     ISPRouter --> Switch1
     
     NAS(NAS)
-    K8sSwitch("K8s Switch<br>(Gigabit<br>Unmanaged)")
+    K8sSwitch("K8s Switch<br>(Gigabit<br>managed)")
     
     Switch1 --> NAS
     Switch1 --> K8sSwitch
