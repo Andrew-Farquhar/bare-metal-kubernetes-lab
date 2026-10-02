@@ -1,7 +1,7 @@
 # Node Preparation:
 
 - System updated
-```
+- 
 - Installed containerd from Docker repository:
 ```bash
 sudo apt update
