@@ -34,6 +34,8 @@ sudo apt update
 sudo apt install kubeadm kubelet kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+apt-mark hold for packages intention to prevent version drift.
+
 # Control Plane Bootstrap:
 
 - Initialised the Kubernetes control plane using kubeadm init, specifying the pod network CIDR used by Flannel:
