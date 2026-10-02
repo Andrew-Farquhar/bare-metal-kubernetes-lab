@@ -1,12 +1,6 @@
 # Node Preparation:
 
 - System updated
-- Permanently disabled swap memory. The /etc/fstab entry was commented out to ensure configuration was persistent between boot cycles.
-``` bash
-sudo swapoff -a
-```
-``` bash
-sudo nano /etc/fstab/
 ```
 - Installed containerd from Docker repository:
 ```bash
