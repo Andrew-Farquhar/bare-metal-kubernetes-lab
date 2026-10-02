@@ -1,5 +1,7 @@
 # Incident Description:
 
+02/10/2026
+
 When attempting to bootstrap the first control-plane on node01, the initialization failed with the following warnings:
 
 - [WARNING ContainerRuntimeVersion] - must update your container runtime to a version that supports the CRI method RuntimeConfig.
