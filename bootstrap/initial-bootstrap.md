@@ -36,6 +36,20 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 apt-mark hold for packages intention to prevent version drift.
 
+- Enabled br_netfilter and made persistent providing visibility of packets crossing bridges to netfilter:
+```bash
+sudo modprobe br_netfilter
+```
+```bash
+echo br_netfilter | sudo tee /etc/modules-load.d/kubernetes.conf
+```
+
+- Enabled IPv4 forwarding and made persistent by editing /etc/sysctl.d/kubernetes.conf; allowing traffic/routing between pods:
+```
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
+
 # Control Plane Bootstrap:
 
 - Initialised the Kubernetes control plane using kubeadm init, specifying the pod network CIDR used by Flannel:
