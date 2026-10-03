@@ -17,7 +17,7 @@ This is purely to facilitate exploring how much load can be applied to the syste
 
 # Why HAProxy and KeepAlived?
 
- Using these services in tandem provided a simple but effective HA network and facilitates using three control-planes. With both services monitoring the state of the node and the opposing service, it ensures that only a healthy node can own the Virtual IP address and that it's kube-api-server can receive traffic.
+ Using these services in tandem provided a simple but effective HA network and facilitates using three control-planes. With both services monitoring the state of the node and the opposing service (Keepalived -> HAproxy & HAProxy -> node's api-server), it ensures that only a healthy node can own the Virtual IP address and that it's kube-api-server can receive traffic.
 
 # Why a bare-metal install of HAProxy and KeepAlived?
 
