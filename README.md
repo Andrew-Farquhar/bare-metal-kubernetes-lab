@@ -29,7 +29,7 @@ The initial implementation will prioritise understanding the mechanics of the in
 | CPU | Intel Core i5-4590T |
 | Memory | 8GB DDR3L (per node) |
 | Storage | 128 GB SATA SSD (per node) |
-| Networking | Cat6 Ethernet to Gigabit unmanaged switch (with scope to move to managed switch) |
+| Networking | Cat6 Ethernet to Gigabit Managed switch |
 
 A sixth node is available and may eventually be used for networking (router/firewall).
 
@@ -40,12 +40,10 @@ The initial cluster will use:
 - Debian 13
 - Kubernetes
 - kubeadm
--  containerd
+- containerd
 - nerdctl
-- A manually configured CNI
+- Flannel CNI
 - NFS-backed persistent storage
-
-The exact CNI and additional Kubernetes components will be documented as the implementation progresses.
 
 # Planned Workloads
 
@@ -96,10 +94,10 @@ Phase 0 — Planning & Preparation
 
 Phase 1 - First build and test of Kubernetes
 
-- [ ] Install and configure first Kubernetes node
-- [ ] Bootstrap Kubernetes control plane
-- [ ] Configure CNI
-- [ ] Join additional nodes
+- [x] Install and configure first Kubernetes node
+- [x] Bootstrap Kubernetes control plane
+- [x] Configure CNI
+- [x] Join additional nodes
 - [ ] Configure persistent storage
 - [ ] Deploy first workload
 - [ ] Implement monitoring
