@@ -38,8 +38,11 @@ Existing unmanaged switch
 
 - KeepAlived provides floating VIP on 192.168.1.240
     Config for KeepAlived gives preference for the VIP to be owned by node01, with weighting configured to fail over to node02 followed by node03. Provides high availability for the VIP by ensuring that if the current VIP owner fails or HAProxy fails it's health condition, another eligible node can take ownership according to VRRP priority.
-    The configured priorities determine which node owns the VIP, with the HAProxy health-check weight reducing a node's priority if HAProxy fails. The weights are configured to ensure that at no time will two healthy nodes have the same priority, this will avoid a split-brain event in the case of a fail over. 
-    KeepAlived is also continually polling HAProxy to ensure it's health on that node. A fault with HAProxy on the node that owns the VIP will trigger a failover
+
+  The configured priorities determine which node owns the VIP, with the HAProxy health-check weight reducing a node's priority if HAProxy fails. The weights are configured to ensure that at no time will two healthy nodes have the same priority, this will avoid a split-brain event in the case of a fail over. 
+
+  KeepAlived is also continually polling HAProxy to ensure it's health on that node. A fault with HAProxy on the node that owns the VIP will trigger a failover
+
 - HAProxy provides load balancing to api-servers on control plane nodes
     Configuration of HAProxy was reasonably simple, using least connections as the load balancing algorithm as opposed to round robin. This decision was purely preference.
 
