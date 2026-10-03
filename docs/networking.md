@@ -50,6 +50,7 @@ Existing unmanaged switch
 
 - Flannel provides a private network on 10.244.0.0/16
     This network does not need to be directly present on the Physical LAN as the connectivity between the physical LAN and pods on this network address is handled by the CNI (Flannel). Flannel provides the networking required for Pods on different nodes to communicate across the physical network.
+  
     The 10.244.0.0/16 network therefore exists as a logical network within the Kubernetes cluster rather than as a physical network on the LAN. The physical network only needs to provide connectivity between the Kubernetes nodes, while Flannel and Kubernetes provide connectivity between the Pods themselves.
   
 ## Network Addressing
