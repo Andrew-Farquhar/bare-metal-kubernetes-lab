@@ -1,0 +1,16 @@
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: JoinConfiguration
+
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "192.168.1.240:8443"
+    token: "join token"
+    caCertHashes:
+      - "sha256:bhash"
+
+
+controlPlane:
+  localAPIEndpoint:
+    advertiseAddress: "node IP"
+    bindPort: 6443
+  certificateKey: "CA Hash"
