@@ -46,8 +46,6 @@ Additional investigation of the etcd and API server configuration confirmed that
 
 # Root Cause:
 
-The root cause was an incorrect separation of responsibilities between HAProxy and kube-apiserver.
-
 The original architecture effectively required HAProxy and kube-apiserver to coexist on the same port:
 
 HAProxy        :6443
