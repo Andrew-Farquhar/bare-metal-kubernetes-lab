@@ -2,8 +2,6 @@
 
 The following preparation was performed on each Kubernetes node.
 
-## System Preparation
-
 * Debian 13 installed as a minimal headless system.
 * System packages updated.
 * Swap disabled.
