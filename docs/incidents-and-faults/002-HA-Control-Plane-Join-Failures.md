@@ -6,7 +6,7 @@
 
 During the initial build of the Kubernetes High Availablity control plane, the second control-plane node failed to join the cluster successfully.
 
-The failure was caused by an incorrect HAProxy/API configuration. HAProxy and the Kubernetes API Server were both attempting to bind to port :6443 on the control-plane nodes, leading to conflicts and an unstable API Server on both the existing and joining node.
+The failure was caused by an incorrect kubeadm configuration that was initially implemented to allow for HAProxy and kube-apiserver to share a port.
 
 Following investigations of the kubelet and API server failures, the architecture was reconfigured so that:
 
@@ -22,7 +22,7 @@ The original cluster state was completely reset and rebuilt using the amended ar
 
 The incident prevented the planned HA control-plane build from completing. 
 
-The first control-plane node was also impacted as etcd quorum issues from the failed join attempt cause etcd to on node01 (the first control-plane) to enter a crash-loop. This in turn caused node01's API server to enter a crash loop.
+The first control-plane node was also impacted as etcd quorum issues from the failed join attempt cause etcd on node01 (the first control-plane) to enter a crash-loop. This in turn caused node01's API server to enter a crash loop.
 
 # Initial Architecture
 
@@ -116,6 +116,7 @@ The important distinction is:
 controlPlaneEndpoint = stable endpoint clients use to reach the cluster
 kube-apiserver :6443 = API server's local listening port
 HAProxy :8443 = proxy entry point
+
 2. A configuration workaround obscured the underlying problem
 
 The API server bind-address configuration was introduced to work around the port conflict.
