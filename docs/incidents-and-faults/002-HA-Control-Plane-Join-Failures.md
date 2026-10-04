@@ -49,9 +49,10 @@ Additional investigation of the etcd and API server configuration confirmed that
 The original architecture effectively required HAProxy and kube-apiserver to coexist on the same port:
 
 HAProxy        :6443
+
 kube-apiserver :6443
 
-The subsequent bind-address workaround attempted to solve the symptom rather than the architectural problem abut had successfully allowed for the first control-plane to initialise. When a second control-plane attempted to join though, it inherited the bind-address configuration from node01. kubeadm join --control-plane builds node02's kube-apiserver manifest from that ConfigMap not from node02's local file. advertiseAddress is set per node in JoinConfiguration, but bind-address was not, so node02 received --bind-address=192.168.1.230. node02 has no interface with that address so kube-apiserver cannot bind and exits on startup and entered a CrashLoopBackOff state and nothing 
+The subsequent bind-address workaround attempted to solve the symptom rather than the architectural problem and had successfully allowed for the first control-plane to initialise. When a second control-plane attempted to join though, it inherited the bind-address configuration from node01. kubeadm join --control-plane builds node02's kube-apiserver manifest from that ConfigMap not from node02's local file. advertiseAddress is set per node in JoinConfiguration, but bind-address was not, so node02 received --bind-address=192.168.1.230. node02 has no interface with that address so kube-apiserver couldn't bind and exited on startup and entered a CrashLoopBackOff state. 
 
 # Resolution & Recovery:
 
