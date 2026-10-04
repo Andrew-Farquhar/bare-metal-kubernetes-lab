@@ -6,7 +6,7 @@ discovery:
     apiServerEndpoint: "192.168.1.240:8443"
     token: "join token"
     caCertHashes:
-      - "sha256:bhash"
+      - "sha256:hash"
 
 
 controlPlane:
