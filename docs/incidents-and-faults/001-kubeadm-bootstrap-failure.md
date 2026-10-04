@@ -1,9 +1,13 @@
 # Incident Description:
 
-**Date:** 02/10/2026
-**Status:** Resolved
-**Affected Node:** `node01`
-**Component:** Kubernetes Control-Plane Bootstrap
+Date: 02/10/2026
+
+Status: Resolved
+
+Affected Node: `node01`
+
+Component: Kubernetes Control-Plane Bootstrap
+
 When attempting to bootstrap the first control-plane on node01, the initialization failed with the following warnings:
 
 # Summary:
