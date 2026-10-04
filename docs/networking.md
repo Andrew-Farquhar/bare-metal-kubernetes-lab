@@ -31,7 +31,7 @@ Existing unmanaged switch
 
 - Floating VIP provided by Keepalived at 192.168.1.240
 - HAProxy runs on node01-03
-- HAProxy listening on 192.168.1.240:6443
+- HAProxy listening on 192.168.1.240:8443
 - api-server on node01-03 listening on respective node IP addresses on port 6443
 
 ## Control Plane High Availability
@@ -71,7 +71,7 @@ Existing unmanaged switch
 
 - Kubernetes API requests:
     kubectl
-      → 192.168.1.240:6443
+      → 192.168.1.240:8443
       → Keepalived-owned node
       → HAProxy
       → one of node01/02/03:6443
