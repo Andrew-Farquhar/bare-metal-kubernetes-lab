@@ -4,7 +4,7 @@
 
 # Summary:
 
-During the initial build of the Kubernetes High Availablity control plane, the second control-plane node failed to join the cluster successfully.
+During the initial build of the Kubernetes High Availability control plane, the second control-plane node failed to join the cluster successfully.
 
 The failure was caused by an incorrect kubeadm configuration that was initially implemented to allow for HAProxy and kube-apiserver to share a port.
 
@@ -22,7 +22,7 @@ The original cluster state was completely reset and rebuilt using the amended ar
 
 The incident prevented the planned HA control-plane build from completing. 
 
-The first control-plane node was also impacted as etcd quorum issues from the failed join attempt cause etcd on node01 (the first control-plane) to enter a crash-loop. This in turn caused node01's API server to enter a crash loop.
+The first control-plane node was also impacted as etcd quorum issues from the failed join attempt caused etcd on node01 (the first control-plane) to enter a crash-loop. This in turn caused node01's API server to enter a crash loop.
 
 # Initial Architecture
 
@@ -100,7 +100,7 @@ controlPlane:
   localAPIEndpoint:
     advertiseAddress: "192.168.1.193"
     bindPort: 6443
-  certificateKey: "CA Key Hash"
+  certificateKey: "Certificate-Key"
 ```
 
 Both successfully became Ready control-plane nodes. The two worker nodes were subsequently joined using the same HA API endpoint.
