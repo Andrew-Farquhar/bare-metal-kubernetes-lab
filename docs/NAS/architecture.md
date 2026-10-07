@@ -20,20 +20,13 @@ The system is designed around low power consumption, reliability, and keeping pe
 
 The primary storage pool is provided by ZFS.
 
-```text
-                    +-------------------+
-                    |        NAS        |
-                    |   Ubuntu Server   |
-                    +---------+---------+
-                              |
-                         SAS3008 HBA
-                              |
-                    +---------v---------+
-                    |   ZFS mediapool   |
-                    |      RAIDZ1        |
-                    +-------------------+
-                       |      |      |
-                     6TB    6TB    6TB
+```mermaid
+flowchart TD
+    nas["NAS<br/>Ubuntu Server"] --> hba["SAS3008 HBA"]
+    hba --> pool["ZFS mediapool<br/>RAIDZ1"]
+    pool --> d1["6TB"]
+    pool --> d2["6TB"]
+    pool --> d3["6TB"]
 ```
 
 The primary pool currently consists of three 6 TB SAS drives in a RAIDZ1 configuration.
@@ -46,21 +39,15 @@ Docker is used to run the majority of application workloads.
 
 Services are grouped according to their networking and storage requirements. Some containers share the network namespace of a VPN gateway container so that their outbound traffic is routed through the VPN.
 
-```text
-                     +------------------+
-                     |      Docker      |
-                     +--------+---------+
-                              |
-             +----------------+----------------+
-             |                |                |
-       Application       VPN Gateway       Supporting
-        Containers        Container          Services
-             |                |                |
-             +----------------+----------------+
-                              |
-                         Host Network
-                              |
-                           Internet
+```mermaid
+flowchart TD
+    docker["Docker"] --> app["Application<br/>Containers"]
+    docker --> vpn["VPN Gateway<br/>Container"]
+    docker --> support["Supporting<br/>Services"]
+    app --> host["Host Network"]
+    vpn --> host
+    support --> host
+    host --> internet["Internet"]
 ```
 
 The VPN-dependent containers are deliberately isolated behind the VPN gateway. A small monitoring script periodically verifies the expected public IP and stops the affected services if the expected network path is not available.
@@ -69,19 +56,13 @@ The VPN-dependent containers are deliberately isolated behind the VPN gateway. A
 
 The host's AMD GPU is passed through to selected containers for hardware-accelerated media processing.
 
-```text
-+--------------------+
-|     Docker         |
-|                    |
-|  Processing Node   |
-|         |          |
-+---------+----------+
-          |
-       /dev/dri
-          |
-+---------v----------+
-|     RX 560 GPU     |
-+--------------------+
+```mermaid
+flowchart TD
+    subgraph docker["Docker"]
+        node["Processing Node"]
+    end
+    node --> dri["/dev/dri"]
+    dri --> gpu["RX 560 GPU"]
 ```
 
 A second system can also act as a remote processing node when additional GPU processing capacity is required.
@@ -92,15 +73,10 @@ Prometheus and Grafana provide host-level monitoring and visualisation.
 
 Node-level metrics are collected from the host, with container and application monitoring being expanded incrementally as required.
 
-```text
-+-------------+       +-------------+
-| NAS         | ----> | Prometheus  |
-| node metrics|       +------+------+
-+-------------+              |
-                              v
-                       +-------------+
-                       |   Grafana   |
-                       +-------------+
+```mermaid
+flowchart TD
+    nas["NAS<br/>node metrics"] --> prom["Prometheus"]
+    prom --> graf["Grafana"]
 ```
 
 ## Design Principles
