@@ -36,26 +36,19 @@ The Pod network uses `10.244.0.0/16`.
 The Kubernetes API is exposed through a virtual IP:
 
 ```text
-192.168.1.240:6443
+192.168.1.240:8443
 ```
 
 Keepalived provides the floating VIP across node01, node02 and node03.
 
 HAProxy runs on all three control-plane nodes and forwards API traffic to the kube-apiserver instances:
 
-```text
-192.168.1.240:6443
-        │
-        ▼
-   Keepalived VIP
-        │
-        ▼
-     HAProxy
-     /  |  \
-    /   |   \
-   ▼    ▼    ▼
-node01 node02 node03
-:6443  :6443  :6443
+```mermaid
+flowchart TD
+    vip["Keepalived VIP<br/>192.168.1.240"] --> haproxy["HAProxy<br/>:8443"]
+    haproxy --> n1["node01<br/>:6443"]
+    haproxy --> n2["node02<br/>:6443"]
+    haproxy --> n3["node03<br/>:6443"]
 ```
 
 Keepalived monitors HAProxy health. If HAProxy fails on the node currently owning the VIP, another eligible control-plane node can assume ownership.
