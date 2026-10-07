@@ -9,21 +9,38 @@
 - Pods are connected to Flannel network
 
 ## Physical Network
-```
-ISP Router
-    │
-    ▼
-Existing unmanaged switch
-    │
-    ├── NAS
-    │
-    └── D-Link managed K8s switch
-             │
-             ├── node01 (control plane + worker) - 192.168.1.230 
-             ├── node02 (control plane + worker) - 192.168.1.193
-             ├── node03 (control plane + worker) - 192.168.1.179
-             ├── node04 (worker) - 192.168.1.164
-             └── node05 (worker) - 192.168.1.154
+```mermaid
+graph TD
+    Internet(Internet)
+    ISPRouter(ISP Router)
+    Switch1("Existing unmanaged switch")
+    K8sSwitch("D-Link DFS-1100-08V2<br>Managed K8s switch")
+
+    Internet --> ISPRouter
+    ISPRouter --> Switch1
+
+    NAS(NAS)
+    Switch1 --> NAS
+    Switch1 --> K8sSwitch
+
+    Node1("node01<br>192.168.1.230<br>Control Plane + Worker")
+    Node2("node02<br>192.168.1.193<br>Control Plane + Worker")
+    Node3("node03<br>192.168.1.179<br>Control Plane + Worker")
+    Node4("node04<br>192.168.1.164<br>Worker")
+    Node5("node05<br>192.168.1.154<br>Worker")
+
+    K8sSwitch --> Node1
+    K8sSwitch --> Node2
+    K8sSwitch --> Node3
+    K8sSwitch --> Node4
+    K8sSwitch --> Node5
+
+    VIP("Kubernetes API VIP<br>192.168.1.240:6443")
+    HAProxy("HAProxy<br>node01-03")
+    VIP --> HAProxy
+    HAProxy --> Node1
+    HAProxy --> Node2
+    HAProxy --> Node3
 ```
 
 
