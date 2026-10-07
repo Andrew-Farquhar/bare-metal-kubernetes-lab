@@ -89,7 +89,7 @@ The Gateway listener was configured to allow HTTPRoutes from other namespaces, a
 
 ## Traffic Flow
 
-Conceptually, traffic to the nginx application follows this routing path:
+Traffic to the nginx application follows this routing path:
 
 ```text
 Client
