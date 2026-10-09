@@ -25,7 +25,7 @@ The initial implementation will prioritise understanding the mechanics of the in
 
 | Component | Specification |
 |-----------|---------------|
-| Nodes | 5 x Dell OptiPlex 9010 Micro (this may drop to 3 in later iterations) |
+| Nodes | 5 x Dell OptiPlex 9020 Micro |
 | CPU | Intel Core i5-4590T |
 | Memory | 8GB DDR3L (per node) |
 | Storage | 128 GB SATA SSD (per node) |
@@ -43,7 +43,8 @@ The initial cluster will use:
 - containerd
 - nerdctl
 - Flannel CNI
-- NFS-backed persistent storage
+- Persistent storage via Longhorn
+- Gateway API & Ingress via Traefik
 
 # Planned Workloads
 
@@ -98,10 +99,10 @@ Phase 1 - First build and test of Kubernetes
 - [x] Bootstrap Kubernetes control plane
 - [x] Configure CNI
 - [x] Join additional nodes
-- [ ] Configure persistent storage
-- [ ] Deploy first workload
-- [ ] Implement monitoring
-- [ ] Test node failure and workload recovery
+- [x] Configure persistent storage
+- [x] Deploy first workload
+- [x] Implement monitoring
+- [x] Test node failure and workload recovery
 
 
 This README will evolve alongside the project.
