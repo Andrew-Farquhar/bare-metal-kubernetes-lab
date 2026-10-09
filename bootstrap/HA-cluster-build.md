@@ -21,7 +21,7 @@ networking:
 The cluster was initialised with:
 
 ```bash
-sudo kubeadm init --config kubeadm-config.yaml
+sudo kubeadm init --config kubeadm-init-config.yaml
 ```
 
 The important configuration here was:
@@ -113,7 +113,7 @@ controlPlane:
 The join was performed with:
 
 ```bash
-sudo kubeadm join --config kubeadm-config.yaml
+sudo kubeadm join --config kubeadm-join-config.yaml
 ```
 
 Once complete node02 was checked from node01:
