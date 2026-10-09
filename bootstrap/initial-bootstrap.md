@@ -1,5 +1,7 @@
 # Node Preparation
 
+Note: File naming conventions in this document are not inline with the current YAML files in this repository. 
+
 The following preparation was performed on each Kubernetes node.
 
 * Debian 13 installed as a minimal headless system.
@@ -34,7 +36,7 @@ The initial control plane was created on `node01` using a kubeadm configuration 
 The configuration defines:
 
 * `node01`'s physical IP address as the advertised API endpoint.
-* `192.168.1.240:6443` as the stable Kubernetes API endpoint.
+* `192.168.1.240:6443` as the stable Kubernetes API endpoint. *Note that `:6443` later caused an incident during the final HA Build.
 * `10.244.0.0/16` as the Pod network CIDR used by Flannel.
 * The kube-apiserver binding address.
 * The expected port conflict caused by HAProxy listening on the API VIP.
