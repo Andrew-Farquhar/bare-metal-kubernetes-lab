@@ -77,4 +77,4 @@ The Kubernetes system Pods were also checked to confirm that the cluster had suc
 
 `node01` was successfully established as the first control-plane node.
 
-The remaining control-plane and worker nodes were subsequently joined to the cluster. This initial bootstrap was intended only to test creating a control-plane and joining nodes to it. The full HA bootstrap process is documented separately in `bootstrap-actual.md`.
+The remaining control-plane and worker nodes were subsequently joined to the cluster. This initial bootstrap was intended only to test creating a control-plane and joining nodes to it. The full HA bootstrap process is documented separately in `HA-cluster-build.md`.
