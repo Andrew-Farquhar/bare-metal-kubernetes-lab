@@ -17,8 +17,11 @@ Grafana queries Prometheus for these metrics and provides the web-based interfac
 kube-prometheus-stack was deployed via helm charts. 
 The kube-prometheus-stack was added to the helm repo. The default values were then copied to a local file to inspect both Grafana and Prometheus' values. This allowed for values specific to the cluster, such as PVC values to be provided to the Grafana and Prometheus pods. The chart's CRD upgrade job was enabled via these values to handle the Prometheus Operator CRDs during installation. This was necessary because manually applying the generated CRDs encountered Kubernetes' metadata annotation size limit.
 - PVCs in this cluster are backed by Longhorn storage. Grafana was provided with 10Gi of block storage, Prometheus was provided with 20Gi.
-- Once configured the helm chart was deployed (command here)
-- Grafana exposed through Traefik/Gateway API. An HTTPRoute was configured and applied to point grafana at Traefik, allowing for a NodePort to be exposed via Traefik.
+- Once configured the helm chart was deployed:
+
+  ```bash helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace```
+  
+- Grafana exposed through Traefik/Gateway API. An HTTPRoute was configured and applied to point grafana at Traefik. Traefik was then exposed via NodePort.
 - Prometheus was kept internal to the cluster. Grafana connects to Prometheus through its Kubernetes Service, meaning Prometheus does not need to be externally exposed.
 
 ### What is being monitored
