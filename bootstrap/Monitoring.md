@@ -19,7 +19,7 @@ The kube-prometheus-stack was added to the helm repo. The default values were th
 - PVCs in this cluster are backed by Longhorn storage. Grafana was provided with 10Gi of block storage, Prometheus was provided with 20Gi.
 - Once configured the helm chart was deployed:
 
-  ```bash helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace```
+  ```helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace```
   
 - Grafana exposed through Traefik/Gateway API. An HTTPRoute was configured and applied to point grafana at Traefik. Traefik was then exposed via NodePort.
 - Prometheus was kept internal to the cluster. Grafana connects to Prometheus through its Kubernetes Service, meaning Prometheus does not need to be externally exposed.
