@@ -143,7 +143,7 @@ The same cluster API endpoint, bootstrap token, CA hash and certificate key were
 The join was performed with:
 
 ```bash
-sudo kubeadm join --config kubeadm-config.yaml
+sudo kubeadm join --config kubeadm-join-config.yaml
 ```
 
 The cluster was then checked:
