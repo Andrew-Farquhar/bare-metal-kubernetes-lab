@@ -81,7 +81,7 @@ graph TD
     K8sSwitch --> Node4
     K8sSwitch --> Node5
 
-    VIP("Kubernetes API VIP<br>192.168.1.240:8443")
+    VIP("Kubernetes API VIP<br>192.168.1.240")
     HAProxy("HAProxy<br>node01-03")
     VIP --> HAProxy
     HAProxy --> Node1
