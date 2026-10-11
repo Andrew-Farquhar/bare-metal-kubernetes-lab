@@ -91,26 +91,14 @@ The Gateway listener was configured to allow HTTPRoutes from other namespaces, a
 
 Traffic to the nginx application follows this routing path:
 
-```text
-Client
-   |
-   v
-Node IP:NodePort
-   |
-   v
-Traefik
-   |
-   v
-Gateway API configuration
-   |
-   v
-HTTPRoute
-   |
-   v
-nginx Service
-   |
-   v
-nginx Pod
+```mermaid
+flowchart TD
+    A[Client] --> B["Node IP:NodePort"]
+    B --> C[Traefik]
+    C --> D[Gateway API configuration]
+    D --> E[HTTPRoute]
+    E --> F[nginx Service]
+    F --> G[nginx Pod]
 ```
 
 A request is first sent to the NodePort exposed by the Traefik Service. Traefik receives the request and uses the Gateway API configuration to determine which HTTPRoute matches it. The HTTPRoute then directs the request to the nginx Service, which forwards it to one of the nginx Pods.
