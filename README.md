@@ -117,5 +117,23 @@ Phase 2 - Ingress, networking and first real workloads
 - [ ] Deploy the first real application workload
 - [ ] Add the Keepalived and HAProxy configuration to the repository
 
+Phase 3 - Deploy planned workloads
+
+- [ ] Immich
+- [x] Mealie
+- [ ] Wanderer
+- [ ] AdventureLog
+- [ ] Home Assistant
+- [ ] Paperless-ngx
+- [ ] Plex
+
+Phase 4 - Automation
+
+- [ ] Ansible playbooks for node preparation (Debian config, containerd, kubeadm packages, kernel modules and sysctls)
+- [ ] Ansible for Keepalived, HAProxy and the control-plane and worker joins
+- [ ] GitOps (Flux or Argo CD) for everything under `components/`
+- [ ] CI checks on the repository (YAML lint, manifest validation, Markdown links)
+- [ ] Rebuild test: wipe a node, reprovision it from the playbooks, rejoin it and confirm it recovers
+- [ ] Evaluate where Terraform fits, if anywhere
 
 This README will evolve alongside the project.
