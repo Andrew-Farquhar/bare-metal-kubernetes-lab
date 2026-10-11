@@ -104,5 +104,18 @@ Phase 1 - First build and test of Kubernetes
 - [x] Implement monitoring
 - [x] Test node failure and workload recovery
 
+Phase 2 - Ingress, networking and first real workloads
+
+- [x] Deploy MetalLB (Layer 2) to provide LoadBalancer IPs on the physical LAN
+- [x] Deploy Gateway API and Traefik for ingress
+- [x] Route a test application by hostname through a Gateway and HTTPRoute
+- [ ] Configure DNS so application hostnames resolve without manual Host headers
+- [ ] Add HTTPS / TLS termination
+- [ ] Configure a Longhorn backup target on the NAS and test a restore
+- [x] Move Pi-hole into the cluster
+- [ ] Add Tailscale for private external access
+- [ ] Deploy the first real application workload
+- [ ] Add the Keepalived and HAProxy configuration to the repository
+
 
 This README will evolve alongside the project.
