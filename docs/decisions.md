@@ -35,11 +35,11 @@ Flannel was the first CNI I came across and I went with it without comparing alt
 
 # Why MetalLB?
 
-MetalLB was recommended to me by a knowledgeable friend. Reading the installation guide the native Layer 2 mode was what settled it: a speaker pod runs on each node and one node is elected to advertise each assigned IP on the physical LAN, which was exactly what I needed. It’s also lightweight, which matters on a cluster with 8GB nodes. The trade-off with L2 mode is that all traffic for a given IP arrives at one node and is forwarded from there, so it provides failover rather than load balancing across nodes.
+MetalLB was recommended to me by a knowledgeable friend. Reading the installation guide the native Layer 2 mode was what settled it: a speaker pod runs on each node and one node is elected to advertise each assigned IP on the physical LAN, which was exactly what I needed. It’s also lightweight which was worth considering on a cluster with 8GB nodes. The trade-off with L2 mode is that all traffic for a given IP arrives at one node and is forwarded from there so it provides failover rather than load balancing across nodes.
 
 # Why Gateway API?
 
-Gateway API was chosen over Traefik-specific tooling so that application routing is defined using Kubernetes-standard resources such as Gateway and HTTPRoute. This also came as a recommendation from a knowledgeable friend. Traefik is responsible for implementing those resources and handling the actual traffic, so the routing definitions aren’t tied to Traefik and the controller could be swapped without rewriting them.
+Gateway API was chosen over Traefik-specific tooling so that application routing is defined using Kubernetes-standard resources such as Gateway and HTTPRoute. This also came as a recommendation from a knowledgeable friend. Traefik is responsible for implementing those resources and handling the actual traffic meaning the routing definitions aren’t tied to Traefik and the controller could be swapped without rewriting them.
 
 # Why Longhorn for persistent storage?
 
@@ -53,13 +53,13 @@ Longhorn uses node-local disks as storage, including existing filesystem rather 
 
 # Why Prometheus and Grafana (kube-prometheus-stack)?
 
-Prometheus and Grafana were implemented to provide centralised dashboards for metrics across the cluster, using industry standard tooling. The kube-prometheus-stack Helm chart was an easy entry point because it’s well documented and packaged. Prometheus is kept internal to the cluster, and Grafana reaches it through its Kubernetes Service, so Prometheus doesn’t need to be exposed. Grafana is exposed through Traefik with an HTTPRoute. Both use Longhorn-backed PVCs so their data isn’t tied to a particular node.
+Prometheus and Grafana were implemented to provide centralised dashboards for metrics across the cluster using industry standard tooling. The kube-prometheus-stack Helm chart was an easy entry point because it’s well documented and packaged. Prometheus is kept internal to the cluster and Grafana reaches it through its Kubernetes Service and thus Prometheus doesn’t need to be exposed. Grafana is exposed through Traefik with an HTTPRoute. Both use Longhorn-backed PVCs so their data isn’t tied to a particular node.
 
 # Why move Pi-hole into the cluster?
 
-Mostly because it’s a good workload to learn on: it’s a real service the whole network uses, and it exercises MetalLB (a LoadBalancer Service at 192.168.1.243 serving DNS over TCP and UDP) in a way a test nginx pod doesn’t.
+Mostly because it’s a good workload to learn on - it’s a real service the whole network uses and it exercises MetalLB (a LoadBalancer Service at 192.168.1.243 serving DNS over TCP and UDP).
 
-DHCP hands out Pi-hole (192.168.1.243) as the primary DNS server and the router (192.168.1.1) as the secondary. If Pi-hole is unavailable, clients fall back to the router’s own resolver, so name resolution keeps working, without filtering, while the cluster is down.
+DHCP hands out Pi-hole (192.168.1.243) as the primary DNS server and the router (192.168.1.1) as the secondary. If Pi-hole is unavailable, clients fall back to the router’s own resolver which keeps name resolution working (without filtering) while the cluster is down.
 
 
 
