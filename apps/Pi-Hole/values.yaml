@@ -1,0 +1,33 @@
+# Single Pi-hole instance
+replicaCount: 1
+
+# DNS exposed through MetalLB
+serviceDns:
+  mixedService: true
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  annotations:
+    metallb.io/loadBalancerIPs: "192.168.1.243"
+
+# DHCP remains on the router
+serviceDhcp:
+  enabled: false
+
+# Keep configuration across pod restarts
+persistentVolumeClaim:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  storageClass: longhorn
+
+# Local timezone
+extraEnvVars:
+  TZ: Europe/London
+  FTLCONF_dns_listeningMode: "all"
+
+# Uses kubernetes secret to store password
+admin:
+  enabled: true
+  existingSecret: pihole-admin
+  passwordKey: password
