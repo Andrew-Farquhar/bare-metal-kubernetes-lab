@@ -27,7 +27,9 @@ Once the change was applied to adjust the values file for Pi-Hole (not related t
 
 ## Root Cause
 
-Due to the default value for `externalTrafficPolicy` being set to `Local` by the Helm chart used to install Pi-Hole. However, 3 of the nodes in cluster (the control-plane + workers) hold a label `node.kubernetes.io/exclude-from-external-load-balancers`. The impact of this is that MetalLB cannot advertise the IP address from these nodes and this is compounded by the service preventing traffic being forwarded to Pi-Hole unless the endpoint is local. When the pod was redeployed as part of the upgrade, it was recreated on ```node01``` (previously on ```node05```), leading to the prevention of connectivity between the node advertising the IP and the Pi-Hole pod.
+Due to the default value for `externalTrafficPolicy` being set to `Local` by the Helm chart used to install Pi-Hole. However, 3 of the nodes in cluster (the control-plane + workers) hold a label `node.kubernetes.io/exclude-from-external-load-balancers`. 
+
+The impact of this is that MetalLB cannot advertise the IP address from these nodes and this is compounded by the service preventing traffic being forwarded to Pi-Hole unless the endpoint is local. When the pod was redeployed as part of the upgrade, it was recreated on ```node01``` (previously on ```node05```), leading to the prevention of connectivity between the node advertising the IP and the Pi-Hole pod.
 
 ## Resolution & Recovery
 
