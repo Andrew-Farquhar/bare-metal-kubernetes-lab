@@ -27,7 +27,7 @@ Once the change was applied to adjust the values file for Pi-Hole (not related t
 
 ## Root Cause
 
-Due to the default value for `externalTrafficPolicy` being set to `Local` by the Helm chart used to install Pi-Hole, when the pod was redeployed to `node01` (previously on `node05`), a request to announce the IP `192.168.1.243` on `node01` was not made. This meant that although DNS queries were routing to this IP, there was no connectivity between the node and the pod.
+Due to the default value for `externalTrafficPolicy` being set to `Local` by the Helm chart used to install Pi-Hole. However, 3 of the nodes in cluster (the control-plane + workers) hold a label `node.kubernetes.io/exclude-from-external-load-balancers`. The impact of this is that MetalLB cannot advertise the IP address from these nodes and this is compounded by the service preventing traffic being forwarded to Pi-Hole unless the endpoint is local. When the pod was redeployed as part of the upgrade, it was recreated on ```node01``` (previously on ```node05```), leading to the prevention of connectivity between the node advertising the IP and the Pi-Hole pod.
 
 ## Resolution & Recovery
 
@@ -73,7 +73,7 @@ Recognising that this configuration likely meant that Pi-Hole was expecting Meta
 kubectl patch svc pihole-dns -n apps -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'
 ```
 
-Once applied, a review of the Pi-Hole WebUI showed that DNS queries were now reaching the pod.
+Once applied, a review of the Pi-Hole WebUI showed that DNS queries were now reaching the pod. This configuration was successful as it allowed for traffic from any node to be routed to the pihole-dns service, as opposed to the default of only allowing this from a node local to the Pi-Hole pod.
 
 To ensure this setting persisted, the ```values.yaml``` for Pi-Hole was edited to include this and another Helm upgrade was carried out. Given that the current configuration matched the updated values, Helm did not redeploy Pi-Hole.
 
