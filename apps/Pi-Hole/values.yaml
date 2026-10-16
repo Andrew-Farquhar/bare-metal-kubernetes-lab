@@ -1,11 +1,24 @@
 # Single Pi-hole instance
 replicaCount: 1
 
+# Ensures Pi-Hole is only scheduled to Node04 or Node05
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node04
+          - node05
+
+
 # DNS exposed through MetalLB
 serviceDns:
   mixedService: true
   type: LoadBalancer
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local #Influences MetalLB's election for advertising the IP to follow local endpoints for Pi-Hole, ideally keeping the speaker and Pi-Hole on the same local node.
   annotations:
     metallb.io/loadBalancerIPs: "192.168.1.243"
 
