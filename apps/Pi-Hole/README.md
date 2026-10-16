@@ -16,8 +16,6 @@ To install and configure Pi-Hole using a helm chart, the helm chart was added to
 
 ## Networking
 
-Describe how DNS traffic reaches Pi-hole and how the web interface is accessed.
-
 - **DNS Service:** ```LoadBalancer```
 - **DNS LoadBalancer IP:** ```192.168.1.243```
 - **Web interface hostname:** ```pihole.home```
