@@ -8,7 +8,7 @@ Following a change to Pi-Hole's `externalTrafficPolicy` to `Cluster`, DNS filter
 
 This was due to traffic being forwarded between nodes, resulting in Pi-Hole observing 50k+ queries from `10.244.3.0`. Following a quick investigation this was identified as the Flannel subnet on Node05, while Pi-Hole was running on Node01.
 
-This led to the realisation that Pi-Hole cannot differentiate clients when inbound DNS traffic to the cluster on `192.168.1.243` (MetalLB's IP for Pi-Hole) is being forwarded across the cluster. The decision was therefore made to restore ```externalTrafficPolicy``` to ```Local``` and restrict Pi-Hole to Node04 or Node05, where MetalLB can advertise the IP.
+This led to the realisation that Pi-Hole cannot differentiate clients when inbound DNS traffic to the cluster on `192.168.1.243` (MetalLB's IP for Pi-Hole) is being forwarded across the cluster. The decision was therefore made to restore ```externalTrafficPolicy``` to ```Local``` and restrict Pi-Hole to Node04 or Node05, where MetalLB can advertise the IP. This allows traffic to reach Pi-Hole locally avoiding cross-node forwarding and restoring Pi-Hole's visibility of the IP address that the DNS query originated from.
 
 ### Change
 
