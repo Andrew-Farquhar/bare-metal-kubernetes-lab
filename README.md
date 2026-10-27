@@ -111,11 +111,10 @@ Phase 2 - Ingress, networking and first real workloads
 - [x] Route a test application by hostname through a Gateway and HTTPRoute
 - [x] Configure DNS so application hostnames resolve without manual Host headers
 - [ ] Add HTTPS / TLS termination
-- [ ] Configure a Longhorn backup target on the NAS and test a restore
+- [x] Configure a Longhorn backup target on the NAS and test a restore
 - [x] Move Pi-hole into the cluster
-- [ ] Add Tailscale for private external access
-- [ ] Deploy the first real application workload
-- [ ] Add the Keepalived and HAProxy configuration to the repository
+- [x] Deploy the first real application workload
+- [x] Add the Keepalived and HAProxy configuration to the repository
 
 Phase 3 - Deploy planned workloads
 
@@ -125,7 +124,7 @@ Phase 3 - Deploy planned workloads
 - [ ] AdventureLog
 - [ ] Home Assistant
 - [ ] Paperless-ngx
-- [ ] Plex
+- [x] Plex
 
 Phase 4 - Automation
 
