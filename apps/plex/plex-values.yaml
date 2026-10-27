@@ -1,0 +1,90 @@
+# Use the existing Plex configuration PVC
+pms:
+  configExistingClaim: plex-pvc
+  gpu:
+    nvidia:
+      enabled: false
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 1000
+    supplementalGroups:
+      - 1001
+
+resources:
+  requests:
+    cpu: 250m
+  limits:
+    cpu: "2"
+
+service:
+  type: LoadBalancer
+  port: 32400
+  loadBalancerIP: 192.168.1.245
+
+# Expose Plex through the existing Traefik Gateway
+httpRoute:
+  enabled: true
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: web
+  hostnames:
+    - plex.home
+
+# Plex environment settings
+extraEnv:
+  PLEX_UID: "1000"
+  PLEX_GID: "1001"
+  TZ: "Europe/London"
+
+# Mount the existing NAS media PVC
+extraVolumes:
+  - name: nas-media
+    persistentVolumeClaim:
+      claimName: nas-media-pvc
+
+extraVolumeMounts:
+  - name: nas-media
+    mountPath: /media
+
+startupProbe:
+  httpGet:
+    path: /identity
+    port: 32400
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 60
+
+livenessProbe:
+  httpGet:
+    path: /identity
+    port: 32400
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /identity
+    port: 32400
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+initContainer:
+  script: |
+    #!/bin/sh
+    echo "fetching pre-existing pms database to import..."
+
+    if [ -d "/config/Library" ]; then
+      echo "PMS library already exists, exiting."
+      exit 0
+    fi
+
+    apk --update add curl
+    curl http://192.168.1.174:8081/pms-import.tgz -o pms.tgz
+    tar -xvzf pms.tgz -C /config
+    cp -r /config/data/Library /config/Library
+    rm -rf /config/data pms.tgz
+
+    echo "Done."
