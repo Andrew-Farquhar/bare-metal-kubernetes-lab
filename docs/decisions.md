@@ -61,6 +61,16 @@ Mostly because it’s a good workload to learn on - it’s a real service the wh
 
 DHCP hands out Pi-hole (192.168.1.243) as the primary DNS server and the router (192.168.1.1) as the secondary. If Pi-hole is unavailable, clients fall back to the router’s own resolver which keeps name resolution working (without filtering) while the cluster is down.
 
+# Why run Tailscale on the NAS?
+
+Tailscale runs as a subnet router on the NAS rather than as an application within Kubernetes. This provides a single, centralised entry point for remote access to both the Kubernetes cluster and services running directly on the NAS, without needing to configure individual access mechanisms for each application.
+
+Running the router independently of Kubernetes also means remote access to the cluster does not depend on the cluster itself being operational. This is useful for troubleshooting and maintaining the infrastructure if the cluster becomes unavailable.
+
+The router advertises the home LAN subnet, with UFW restricting forwarded traffic to the services intended for remote access. Tailscale split DNS forwards queries for the private `.home` domain to Pi-hole, allowing existing service hostnames to resolve remotely.
+
+This approach avoids exposing services directly to the public internet while keeping remote access configuration centralised and relatively simple to maintain.
+
 
 
 
