@@ -6,12 +6,12 @@ affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
+        - matchExpressions:
+          - key: kubernetes.io/hostname
           operator: In
           values:
-          - node04
-          - node05
+            - node04
+            - node05
 
 
 # DNS exposed through MetalLB
@@ -30,7 +30,7 @@ serviceDhcp:
 persistentVolumeClaim:
   enabled: true
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   size: 1Gi
   storageClass: longhorn
 
