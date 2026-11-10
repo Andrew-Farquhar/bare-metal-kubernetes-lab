@@ -118,7 +118,7 @@ Phase 2 - Ingress, networking and first real workloads
 
 Phase 3 - Deploy planned workloads
 
-- [ ] Immich
+- [x] Immich
 - [x] Mealie
 - [ ] Wanderer
 - [ ] AdventureLog
