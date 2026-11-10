@@ -28,6 +28,6 @@ jobs:
           sudo apt-get install yamllint -y
 
       - name: run yamllint
-        run: yamllint .
+        run: yamllint -c .yamllint .
 
 
