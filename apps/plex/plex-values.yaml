@@ -9,12 +9,13 @@ pms:
     runAsGroup: 1000
     supplementalGroups:
       - 1001
-
-resources:
-  requests:
-    cpu: 250m
-  limits:
-    cpu: "2"
+  resources:
+    requests:
+      cpu: 2000m
+      memory: 2Gi
+    limits:
+      cpu: 3000m
+      memory: 3Gi
 
 service:
   type: LoadBalancer
