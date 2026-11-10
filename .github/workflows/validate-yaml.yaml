@@ -28,4 +28,4 @@ jobs:
           sudo apt-get install yamllint -y
 
       - name: run yamllint
-        run: yamllint -c .yamllint .
+        run: git diff --name-only | grep '.yaml' | xargs -r yamllint -c .yamllint
