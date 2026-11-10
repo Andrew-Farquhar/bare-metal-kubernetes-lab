@@ -8,7 +8,6 @@ discovery:
     caCertHashes:
       - "sha256:hash"
 
-
 controlPlane:
   localAPIEndpoint:
     advertiseAddress: "node IP"

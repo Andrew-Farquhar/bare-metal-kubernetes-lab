@@ -12,7 +12,6 @@ grafana:
       - ReadWriteOnce
     size: 10Gi
 
-
 prometheus:
   prometheusSpec:
     storageSpec:

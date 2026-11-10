@@ -4,7 +4,6 @@ service:
   spec:    
     type: LoadBalancer
 
-
 ingressRoute:
   dashboard:
     enabled: true

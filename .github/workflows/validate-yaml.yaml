@@ -2,9 +2,9 @@ name: yaml-lint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,5 +29,3 @@ jobs:
 
       - name: run yamllint
         run: yamllint -c .yamllint .
-
-
