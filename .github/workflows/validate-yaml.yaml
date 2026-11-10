@@ -30,4 +30,4 @@ jobs:
           sudo apt-get install yamllint -y
 
       - name: run yamllint
-        run: git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.yaml' | xargs -r yamllint -c .yamllint #upsetting comment here
+        run: git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.yaml' | xargs -r yamllint -c .yamllint 
