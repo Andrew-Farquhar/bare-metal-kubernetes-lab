@@ -18,7 +18,7 @@ affinity:
 serviceDns:
   mixedService: true
   type: LoadBalancer
-  externalTrafficPolicy: Local #Influences MetalLB's election for advertising the IP to follow local endpoints for Pi-Hole, ideally keeping the speaker and Pi-Hole on the same local node.
+  externalTrafficPolicy: Local  # Influences MetalLB's election for advertising the IP to follow local endpoints for Pi-Hole, ideally keeping the speaker and Pi-Hole on the same local node.
   annotations:
     metallb.io/loadBalancerIPs: "192.168.1.243"
 
@@ -30,7 +30,7 @@ serviceDhcp:
 persistentVolumeClaim:
   enabled: true
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   size: 1Gi
   storageClass: longhorn
 

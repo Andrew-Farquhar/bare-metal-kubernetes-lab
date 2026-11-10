@@ -94,9 +94,9 @@ spec:
   selector:
     app: mealie
   ports:
-  - protocol: TCP
-    port: 9000
-    targetPort: 9000
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
   type: ClusterIP
 
 ---
@@ -114,9 +114,9 @@ spec:
     - mealie.home
   rules:
     - matches:
-      - path:
-          type: PathPrefix
-          value: /
+        - path:
+            type: PathPrefix
+            value: /
       backendRefs:
         - name: mealie-service
           port: 9000

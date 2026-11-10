@@ -1,7 +1,7 @@
 service:
   annotations:
     metallb.io/loadBalancerIPs: "192.168.1.241"
-  spec:    
+  spec:
     type: LoadBalancer
 
 ingressRoute:
