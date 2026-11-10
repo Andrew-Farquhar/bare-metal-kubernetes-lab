@@ -8,3 +8,7 @@
 
 - Deployed using manifest written manually following templates found online. Helm charts may be available, however, decided to spend the time manually writing the manifest for practice.
 - Recipe tracking app
+
+# Plex:
+- Deployed using helm chart + custom values. Deployment was more involved so a full write-up of the deployment is available here - ```apps/plex/README.md```
+- Provides media library playback and organisation. 
