@@ -1,0 +1,16 @@
+name: kubeconform
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  manifest-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Kubeconform
+        uses: docker://ghcr.io/yannh/kubeconform:v0.7.0
+        with:
+          args: "-summary -ignore-missing-schemas apps/ components/"

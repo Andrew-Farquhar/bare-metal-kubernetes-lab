@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+
+  # Identify which areas of the repository have changed
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      yaml: ${{ steps.filter.outputs.yaml }}
+      manifests: ${{ steps.filter.outputs.manifests }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            yaml:
+              - '**/*.yaml'
+              - '.yamllint'
+            manifests:
+              - 'apps/*/manifests/**'
+              - 'components/*/manifests/**'
+
+  # YAML linting
+  yaml-lint:
+    needs: change
+    if: needs.changes.outputs.yamml == 'true'
+    uses: ./.github/workflows/validate-yaml.yaml
+
+  # Kubernetes manifest validation
+  kubeconform:
+    needs: change
+    if: needs.changes.outputs.manifests == 'true'
+    uses: ./.github/workflows/kubeconform.yaml
+
+  # Helm validation
+  helm:
+    ...
+
+  # Markdown validation
+  markdown:
+    ...
