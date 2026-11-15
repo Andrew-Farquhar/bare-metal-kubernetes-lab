@@ -30,7 +30,7 @@ Decision: Store Immich's managed media on the NAS using NFS, rather than longhor
 
 The NAS already provides ZFS-Backed storage exposed to the cluster via NFS. There's considerably more capacity than is present on the nodes themselves and with some media being irreplaceable this gives peace of mind that a drive failure or fault will not result in total loss (although Longhorn has it's own redundancy in place also).
 
-Immich reuses the same persistentVolume and persistentVolumeClaim as the plex deployment, however, different paths are exposed to each deployment. 
+Immich reuses the same persistentVolume and persistentVolumeClaim configuration as the plex deployment, however, different paths are exposed to each deployment via separate PV and PVCs.
 
 ## PostgreSQL
 
