@@ -27,6 +27,7 @@ The configured address pool contains:
 
 * `192.168.1.241/32` — application traffic, currently assigned to Traefik.
 * `192.168.1.243/32` — DNS traffic, currently assigned to Pi-hole.
+* `192.168.1.245/32` - Plex to provide IP:Port access for SmartTVs.
 
 These addresses were selected because they sit outside the router's DHCP address pool thus avoiding conflicts with dynamically assigned client addresses.
 

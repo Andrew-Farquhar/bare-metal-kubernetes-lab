@@ -261,7 +261,9 @@ The final Longhorn configuration is:
 | Storage disk | 128 GB SanDisk X400 SSD per node |
 | Default disk creation | Labelled nodes only |
 | Longhorn management | node01, node04, node05 |
-| Backup target | Not configured |
+| Backup target | ZFS Backed Storage pool on NAS shared via NFS |
+| Backup Schedule | Daily at 2am for all volumes |
+| Backup Retention | 7 Days |
 | Default StorageClass | Longhorn |
 
 The cluster currently has two independent copies of Longhorn volume data across node04 and node05.
