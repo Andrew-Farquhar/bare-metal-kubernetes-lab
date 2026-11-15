@@ -157,16 +157,16 @@ This reinforced the importance of checking the Helm chart's actual values struct
 
 ## Current State
 
-Gateway API and Traefik are operational in the cluster.
+Since the initial deployment, MetalLB has been introduced to the cluster to provide LoadBalancer functionality.
 
-Traefik is exposed using a NodePort and is configured to use the Kubernetes Gateway API provider. A GatewayClass, Gateway and HTTPRoute are successfully working together to route traffic to an nginx application.
+The Traefik Service was subsequently changed from NodePort to LoadBalancer and assigned the MetalLB IP address `192.168.1.241`.
 
-Hostname-based routing using `nginx.home` has also been successfully demonstrated.
+This allows applications to be accessed through a consistent IP rather than individual node IPs and NodePorts.
 
 ## Future Work
 
-* Configure DNS so application hostnames resolve without manually specifying the Host header.
+* Configure DNS so application hostnames resolve without manually specifying the Host header - Local DNS handled by Pi-Hole deployment.
 * Add HTTPS and TLS termination.
-* Add additional applications using HTTPRoutes.
-* Integrate Tailscale for external/private access.
-* Consider a LoadBalancer implementation such as MetalLB if required.
+* Add additional applications using HTTPRoutes - Complete
+* Integrate Tailscale for external/private access - Tailscale access provisioned outside of cluster.
+* Consider a LoadBalancer implementation such as MetalLB if required - Complete (See Current State)
