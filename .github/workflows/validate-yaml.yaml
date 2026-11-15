@@ -27,3 +27,6 @@ jobs:
           BASE: ${{ github.event.before || 'HEAD^1' }}
         run: |
           git diff --name-only --diff-filter=d "$BASE" HEAD -- '*.yaml' '*.yml' | xargs -r yamllint -c .yamllint
+
+        
+    #intentional yaml line to upset linter
