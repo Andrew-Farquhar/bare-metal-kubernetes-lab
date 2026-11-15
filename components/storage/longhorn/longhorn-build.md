@@ -279,5 +279,5 @@ Longhorn management components are currently present on node01, node04 and node0
 - The replicas are block-level storage and should not be treated as normal directories containing application files.
 - Kubernetes decides where the Pod runs, while Longhorn handles where the volume replicas are stored.
 - Replication provides availability against storage-node failure but is not a replacement for backups.
-- The NAS can be used as a future Longhorn backup target.
+- The NAS can be used as a future Longhorn backup target. (Implemented - See current state)
 - The failure test demonstrated that application data remained available when one Longhorn storage node was unavailable.
