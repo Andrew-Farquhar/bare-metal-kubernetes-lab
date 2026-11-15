@@ -21,7 +21,7 @@ The kube-prometheus-stack was added to the helm repo. The default values were th
 
   ```helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace```
   
-- Grafana exposed through Traefik/Gateway API. An HTTPRoute was configured and applied to point grafana at Traefik. Traefik was then exposed via NodePort.
+- Grafana exposed through Traefik/Gateway API. An HTTPRoute was configured and applied to point grafana at Traefik. 
 - Prometheus was kept internal to the cluster. Grafana connects to Prometheus through its Kubernetes Service, meaning Prometheus does not need to be externally exposed.
 
 ### What is being monitored

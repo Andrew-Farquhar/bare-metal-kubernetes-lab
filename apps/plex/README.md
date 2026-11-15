@@ -14,7 +14,7 @@ The migration also provided an opportunity to use the cluster's existing storage
 - **Application version:** `1.43.3.10896`
 - **Configuration location:** `~/helm/plex/plex-values.yaml`
 
-The Plex Helm repository was added and the chart's default values were reviewed before creating a custom values file specifying an existing PVC, limited resources (2 CPU, 250m), service and httpRoutes and Plex's UID/GID alongside a liveness, readiness and startup Probe.
+The Plex Helm repository was added and the chart's default values were reviewed before creating a custom values file specifying an existing PVC, resource limits and requests, service and httpRoutes and Plex's UID/GID alongside a liveness, readiness and startup Probe.
 
 ## Networking
 
