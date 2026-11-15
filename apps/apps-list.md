@@ -12,3 +12,7 @@
 # Plex:
 - Deployed using helm chart + custom values. Deployment was more involved so a full write-up of the deployment is available here - ```apps/plex/README.md```
 - Provides media library playback and organisation. 
+
+# Immich:
+- Deployed using Helm with a CloudNativePG PostgreSQL database. Deployment was reasonable involved. Full write-up of deployment is available here - ```apps/Immich/README.md```
+- Self-hosted photo and video management platform. Continually backs-up and hosts images taken on Mobile devices.
