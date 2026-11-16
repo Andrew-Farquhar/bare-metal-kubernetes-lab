@@ -1,0 +1,25 @@
+name: kubeconform-repo-wide
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  manifest-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: yokawasa/action-setup-kube-tools@v0.11.2
+        with:
+          kubeconform: '0.7.0'
+      
+      - name: Run Kubeconform
+        run: |
+          kubeconform \
+            -summary \
+            -ignore-missing-schemas \
+            apps/*/manifests \
+            components/*/manifests
+            
