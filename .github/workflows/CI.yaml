@@ -38,11 +38,3 @@ jobs:
     needs: change
     if: needs.changes.outputs.manifests == 'true'
     uses: ./.github/workflows/kubeconform.yaml
-
-  # Helm validation
-  helm:
-    ...
-
-  # Markdown validation
-  markdown:
-    ...
