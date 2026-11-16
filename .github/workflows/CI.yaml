@@ -29,12 +29,12 @@ jobs:
 
   # YAML linting
   yaml-lint:
-    needs: change
+    needs: changes
     if: needs.changes.outputs.yamml == 'true'
     uses: ./.github/workflows/validate-yaml.yaml
 
   # Kubernetes manifest validation
   kubeconform:
-    needs: change
+    needs: changes
     if: needs.changes.outputs.manifests == 'true'
     uses: ./.github/workflows/kubeconform.yaml
