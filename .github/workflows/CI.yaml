@@ -30,7 +30,7 @@ jobs:
   # YAML linting
   yaml-lint:
     needs: changes
-    if: needs.changes.outputs.yamml == 'true'
+    if: needs.changes.outputs.yaml == 'true'
     uses: ./.github/workflows/validate-yaml.yaml
 
   # Kubernetes manifest validation
