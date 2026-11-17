@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: apps
+  name: pngx-app-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-webserver
+  labels:
+    app: paperless-ngx
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: paperless-ngx-webserver
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      volumes:
+        - name: pngx-app-data
+          persistentVolumeClaim:
+            claimName: pngx-app-data
+      containers:
+        - name: pngx-webserver
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8000
+          env:
+            - name: pngx-redis
+              value: redis://pngx-redis:6379
+          
