@@ -5,7 +5,7 @@ import sys
 import urllib.request
 import json
 
-zpool_status = subprocess.run(["zpool", "status"],
+zpool_status = subprocess.run(["zpool", "status", "mediapool"],
                capture_output=True,
                check=True,
                text=True,)
@@ -13,7 +13,7 @@ zpool_status = subprocess.run(["zpool", "status"],
 lines = zpool_status.stdout.splitlines()
 data = { "state": None }
 vdevs = { "vdevs": [] }
-webhook_url = 'YOUR_WEBHOOK_URL_HERE'
+webhook_url = 'YOUR_DISCORD_WEBHOOK_URL'
 
 def send_discord_alert(message):
     payload = {"content": message}
@@ -45,22 +45,22 @@ for line in lines:
 
 
 if data["state"] != 'ONLINE':
-    discord_message = f" :warning: Issues have been detected with the pool, the current state is: {data["state"]}"
+    discord_message = f" :warning: Issues have been detected with the media pool, the current state is: {data["state"]}"
     send_discord_alert(discord_message)
 elif data["state"] == 'ONLINE':
-    send_discord_alert('ZFS Pool is overall healthy')
+    send_discord_alert('Media Pool is overall healthy')
 
 any_vdev_issue = False
 
 for vdev in vdevs["vdevs"]:
     if vdev["vdev_state"] != 'ONLINE':
-        vdev_down = f":warning: issues detected with the following drive(s) being down: {vdev}"
+        vdev_down = f":warning: issues detected with the following drive(s) in Media being down: {vdev}"
         send_discord_alert(vdev_down)
         any_vdev_issue = True
     elif vdev["read"] != 0 or vdev["write"] != 0 or vdev["chksum"] !=0:
-        vdev_fault = f":warning: minor fault detected with the following drive(s), see error counts: {vdev}"
+        vdev_fault = f":warning: minor fault detected with the following drive(s) in Media, see error counts: {vdev}"
         send_discord_alert(vdev_fault)
         any_vdev_issue = True
 
 if not any_vdev_issue:
-        send_discord_alert('All drives are healthy')
+        send_discord_alert('All drives are healthy in Media pool')
