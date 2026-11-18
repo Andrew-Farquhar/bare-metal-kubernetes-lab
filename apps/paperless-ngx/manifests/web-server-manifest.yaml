@@ -43,4 +43,10 @@ spec:
           env:
             - name: pngx-redis
               value: redis://pngx-redis:6379
-          
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi

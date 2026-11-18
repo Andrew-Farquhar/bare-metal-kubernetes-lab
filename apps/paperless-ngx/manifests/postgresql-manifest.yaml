@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: pngx-database
+  namespace: apps
+spec:
+  # "app"/"app" is auto-generated via cnpg in each cluster, adjust to your user/database
+  name: app
+  owner: app
+  cluster:
+    name: pngx-database
