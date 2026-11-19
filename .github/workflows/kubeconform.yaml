@@ -4,22 +4,29 @@ on:
   workflow_call:
 
 jobs:
-
   manifest-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Identify changed manifests
         id: changed-manifests
         env:
           BASE: ${{ github.event.before || 'HEAD^1' }}
         run: |
-          CHANGED_MANIFESTS=$(git diff --name-only --diff-filter=d "$BASE" HEAD -- '*.yaml' '*.yml')
-          echo "files=$CHANGED_MANIFESTS" >> "$GITHUB_OUTPUT"
+          CHANGED_MANIFESTS=$(git diff --name-only --diff-filter=d "$BASE" HEAD -- '*.yaml')
+
+          {
+            echo "files<<EOF"
+            echo "$CHANGED_MANIFESTS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Run Kubeconform
+        if: steps.changed-manifests.outputs.files != ''
         uses: docker://ghcr.io/yannh/kubeconform:latest
         with:
           args: "-summary -output json ${{ steps.changed-manifests.outputs.files }}"
+
