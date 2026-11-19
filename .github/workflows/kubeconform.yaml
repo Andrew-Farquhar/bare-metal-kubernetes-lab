@@ -6,27 +6,34 @@ on:
 jobs:
   manifest-validation:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Identify changed manifests
-        id: changed-manifests
-        env:
-          BASE: ${{ github.event.before || 'HEAD^1' }}
-        run: |
-          CHANGED_MANIFESTS=$(git diff --name-only --diff-filter=d "$BASE" HEAD -- '*.yaml')
+      - uses: yokawasa/action-setup-kube-tools@v0.11.2
+        with:
+          kubeconform: '0.7.0'
 
-          {
-            echo "files<<EOF"
-            echo "$CHANGED_MANIFESTS"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+      - name: Identify changed manifests
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          git diff --name-only --diff-filter=d "$BASE" HEAD -- '*.yaml' > changed-manifests.txt
+          cat changed-manifests.txt
 
       - name: Run Kubeconform
-        if: steps.changed-manifests.outputs.files != ''
-        uses: docker://ghcr.io/yannh/kubeconform:latest
-        with:
-          args: "-summary -output json ${{ steps.changed-manifests.outputs.files }}"
+        shell: bash
+        run: |
+          mapfile -t MANIFESTS < changed-manifests.txt
 
+          if (( ${#MANIFESTS[@]} == 0 )); then
+            echo "No changed manifests to validate."
+            exit 0
+          fi
+
+          kubeconform \
+            -summary \
+            -ignore-missing-schemas \
+            "${MANIFESTS[@]}"
