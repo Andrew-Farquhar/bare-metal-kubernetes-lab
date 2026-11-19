@@ -5,7 +5,7 @@ metadata:
   namespace: apps
 spec:
   # "app"/"app" is auto-generated via cnpg in each cluster, adjust to your user/database
-  name: app
-  owner: app
+  name: pngx
+  owner: pngx
   cluster:
     name: pngx-database
