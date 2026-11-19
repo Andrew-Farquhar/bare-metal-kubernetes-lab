@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pngx-app-data
+  namespace: apps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-webserver
+  namespace: apps
+  labels:
+    app: paperless-ngx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      volumes:
+        - name: pngx-app-data
+          persistentVolumeClaim:
+            claimName: pngx-app-data
+        - name: nas-pngx-media
+          persistentVolumeClaim:
+            claimName: nas-pngx-pvc
+      containers:
+        - name: pngx-webserver
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: pngx-app-data
+              mountPath: /usr/src/paperless/data
+            - name: nas-pngx-media
+              mountPath: /usr/src/paperless/media
+          env:
+            - name: PAPERLESS_DBENGINE
+              value: postgresql
+            - name: PAPERLESS_DBHOST
+              valueFrom:
+                secretKeyRef:
+                  name: pngx-database-app
+                  key: host
+            - name: PAPERLESS_DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: pngx-database-app
+                  key: username
+            - name: PAPERLESS_DBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: pngx-database-app
+                  key: password
+            - name: PAPERLESS_DBNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pngx-database-app
+                  key: dbname
+            - name: PAPERLESS_REDIS
+              value: redis://pngx-redis:6379
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+
