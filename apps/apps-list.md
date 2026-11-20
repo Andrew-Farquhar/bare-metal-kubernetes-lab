@@ -16,3 +16,8 @@
 # Immich:
 - Deployed using Helm with a CloudNativePG PostgreSQL database. Deployment was reasonable involved. Full write-up of deployment is available here - ```apps/Immich/README.md```
 - Self-hosted photo and video management platform. Continually backs-up and hosts images taken on Mobile devices.
+
+# Paperless-ngx:
+
+- Deployed using manifests written manually, based mostly on docker compose files found on the Paperless-ngx github. Full write-up of deployment is available here - ```apps/paperless-ngx/README.md```
+- Self-hosted document storage and organization platform. 
