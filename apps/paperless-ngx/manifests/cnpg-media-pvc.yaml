@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 10Ti
-  volumeName: nas-pngx-pvc
+  volumeName: nas-pngx-pv
   storageClassName: ""

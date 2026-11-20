@@ -49,6 +49,10 @@ spec:
             - name: nas-pngx-media
               mountPath: /usr/src/paperless/media
           env:
+            - name: USERMAP_UID
+              value: "1000"
+            - name: USERMAP_GID
+              value: "1001"
             - name: PAPERLESS_DBENGINE
               value: postgresql
             - name: PAPERLESS_DBHOST
@@ -73,6 +77,11 @@ spec:
                   key: dbname
             - name: PAPERLESS_REDIS
               value: redis://pngx-redis:6379
+            - name: PAPERLESS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pngx-secret
+                  key: PAPERLESS_SECRET_KEY
           resources:
             requests:
               cpu: 250m
