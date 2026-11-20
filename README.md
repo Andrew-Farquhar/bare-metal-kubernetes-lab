@@ -123,7 +123,7 @@ Phase 3 - Deploy planned workloads
 - [ ] Wanderer
 - [ ] AdventureLog
 - [ ] Home Assistant
-- [ ] Paperless-ngx
+- [x] Paperless-ngx
 - [x] Plex
 
 Phase 4 - Automation
