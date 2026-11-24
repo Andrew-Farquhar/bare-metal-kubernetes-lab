@@ -6,11 +6,8 @@ crds:
 grafana:
   persistence:
     enabled: true
-    type: sts
-    storageClassName: longhorn
-    accessModes:
-      - ReadWriteOnce
-    size: 10Gi
+    type: pvc
+    existingClaim: grafana
 
 prometheus:
   prometheusSpec:
